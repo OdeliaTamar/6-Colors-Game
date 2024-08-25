@@ -97,12 +97,4 @@
 
 Note: Depending on your SFML installation, you might need to adjust the include paths and library paths in your compilation command.
 
-### Controls
 
-[Add information about game controls here]
-
-## Future Development
-
-- Implement network multiplayer functionality
-- Add more AI difficulty levels
-- Create a level editor for custom hexagon layouts
