@@ -97,4 +97,7 @@
 
 Note: Depending on your SFML installation, you might need to adjust the include paths and library paths in your compilation command.
 
+![Open page](./resources/the_begining.png)
+
+![Open page](./resources/the_game.png)
 
