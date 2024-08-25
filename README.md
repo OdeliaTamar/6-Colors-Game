@@ -99,5 +99,5 @@ Note: Depending on your SFML installation, you might need to adjust the include 
 
 ![Open page](./resources/the_begining.png)
 
-![Open page](./resources/the_game.png)
+![game](./resources/the_game.png)
 
