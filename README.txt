@@ -1,45 +1,56 @@
-תרגיל 4
+Six Colors Hexagon Game
+General Overview
+The "Six Colors" game is a hexagonal strategy game involving two players: one human and one computer. The goal is to dominate the hexagonal board by capturing adjacent hexagons through color selection. The game leverages a graphical library to present an engaging and strategic experience. The computer opponent can be configured to follow different strategies—global greedy, local greedy, or random selection—adding depth and variability to the gameplay.
 
-מגישות: 
-אודליה תמר שמש ת.ז 316338896
-הדס מימון ת.ז 324019744  
+Project Structure and File Descriptions
+Algorithm.cpp/hpp
+This class is responsible for calculating the BFS algorithm and other auxiliary calculations used by the various computer players.
+BaseComputer.cpp/hpp
+An abstract base class inherited by three distinct computer players:
+GlobalComputer
+Represents the global greedy computer player who strategizes based on the entire board.
+LocalComputer
+Represents the local greedy player who selects the optimal move based on neighboring hexagons only.
+RegularComputer
+A random player that chooses one of the available colors at random.
+Board.cpp/hpp
+Manages the board, a vector of hexagonal cells. This class organizes the gameplay space and facilitates interactions between hexagons.
+Hexagon.cpp/hpp
+Holds a hexagon as an sf::CircleShape m_hexagon, storing its color and other attributes.
+Cell.cpp/hpp
+Contains a Hexagon member and stores a vector of neighboring hexagons, representing individual cells on the board.
+Controller.cpp/hpp
+Oversees the game's operations, handling objects and player interactions.
+Display.cpp/hpp
+Presents player selection options (Global, Local, or Random strategies).
+Menu.cpp/hpp
+Displays the available colors for players to choose from.
+Player.cpp/hpp
+Represents the human player in the game.
+Utilities.cpp/hpp
+Contains constants used throughout the program.
+Key Data Structures
+Cell
+The Cell class contains the Hexagon class and holds a vector of neighbors.
+Board
+Contains a vector of Cell objects, effectively representing the game board.
+Controller
+Manages two key vectors:
+std::vector<std::shared_ptr<Cell>> m_userVec
+std::vector<std::shared_ptr<Cell>> m_computerVec
+These vectors are populated by the BFS algorithm found in the Algorithm class, which examines the color paths, finding the longest chain of hexagons of the same color for the player.
+Notable Algorithms
+BFS (Breadth-First Search)
+Utilized by the global greedy player to search for the optimal move across the entire board.
 
-הסבר כללי של התרגיל:
-בתרגיל זה נבנה את המשחק "שישה צבעים" בגרסת המשושים תוך שימוש בספריה הגרפית. המשחק כולל שני שחקנים – אנושי וממוחשב.
+Random Color Selection
+Used by the random player to choose a color without following a set strategy.
 
-רשימה של הקבצים שיצרנו, עם הסבר קצר: 
-Algorithm- המחלקה אחראית לחישוב האלגוריתם BFS וכן חישובים עזר נוספים שנועדו לשחקנים האחרים.
-BaseComputer- מחלקה אבסטרקטית אשר ממנה יורשים 3 - מחלקות שונות:
-1). GlobalComputer- מחלקה עבור שחקן חמדן גלובלי.
-2). LocalComputer - מחלקה עבור שחקן חמדן מקומי.
-3). RegularComputer- שחקן רנדומלי, שבוחר רנדומלית את אחד הצבעים האפשריים.
-Board - מחלקה מחזיקה "לוח" - ווקטור של משושים.
-Hexagon- המחלקה מחזיקה ממבר משושה מסוג sf::CircleShape m_hexagon וכן מחזיקה את הצבע שלו.
-Cell- המחלקה מכילה ממבר מסוג Hexagon , ועבורו מחזיקה ווקטור של שכניו.
-Controller - המחלקה אחרית על ניהול המשחק והחזקת האוביקטים השונים.
-Display - המחלקה מציגה את האפשרויות לבחירת שחקן : 1- גלובלי, 2- מקומי, 3- רנדומלי.
-Menu - המחלקה מציגה את הצבעים שאותם ניתן לבחור.
-Player - המחלקה של המשתמש.
-Utilities - מכיל את הקבועים של התוכנית.
+Local Greedy Color Selection
+Focuses on a single cell, checking which color will yield the highest gain by examining only its six immediate neighbors, as opposed to the BFS that considers a wider range of neighbors.
 
-מבני נתונים עיקריים ותפקידיהם:
-מחלקת Cell מכילה את מחלקת Hexagon ושומרת עבור כל Hexagon ווקטור של שכניו וה- Board מכיל ווקטור של Cell.
-ל - Controller יש שני ווקטורים האחד הוא std::vector<std::shared_ptr<Cell>> m_userVec וכן std::vector<std::shared_ptr<Cell>> m_computerVec 
-אליהם נכנסים ע"י האלגורים BFS שנמצא במחלקת Algorithm  שבה נעשה שימוש בוקטור של השכנים, כל משושה ומספק מסלול ארוך ביותר עבור צבע מסוים,
- ועבור אותו הצבע נכנסים כל המשושים שיש להם את הצבע זהה אליו.
-
-אלגוריתמים הראויים לציון:
-BFS - עבור השחקן הגלובלי
-הגרלת צבע עבור מסלול- שחקן רנדומלי.
-מעבר על Cell בודד ובדיקה איזה צבע יתן הכי הרבה אך ורק מ - 6 שכניו בלבד! (בשונה מ- BFS ששם עוברים עבור כל שכן בודקים את שכניו ואת שכני שכניו)- עבור השחקן המקומי.
-
-תיכון (design): 
-המחלקות : GlobalComputer, LocalComputer, RegularComputer יורשות מהמחלקה BaseComputer.
-Cell מכיל את Hexagon.
-וכן ווקטורים נוספים שכנתבו למעלה.
-
-באגים ידועים:
-
-
-הערות אחרות:
-
+Design
+Class Hierarchy
+The GlobalComputer, LocalComputer, and RegularComputer classes inherit from the BaseComputer class.
+Relationships
+The Cell class contains the Hexagon class, and both store additional vectors described above. These relationships help manage the connections and structure between the hexagonal cells on the board.
